@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+if [ $# -ne 1 ]; then
+	echo "usage:$0 [containers count]"
+	exit -1
+fi
 
 function clean() {
     path=`pwd`/node$1
