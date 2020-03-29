@@ -1,0 +1,20 @@
+version: "3"
+services:
+    mysql:
+        image: mysql:8.0
+        volumes:
+            - {path}/mysql/data:/var/lib/mysql
+            - {path}/mysql/conf.d:/etc/mysql/conf.d
+        ports:
+            - {port}:3306
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4;' --innodb-flush-log-at-trx-commit=0
+        networks:
+            vpc:
+                ipv4_address: '10.10.0.1{id}'
+        environment:
+            MYSQL_ROOT_PASSWORD: 12345678
+        restart: always
+networks:
+    vpc:
+        external:
+            name: test_vpc

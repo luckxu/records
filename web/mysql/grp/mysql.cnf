@@ -1,0 +1,25 @@
+[mysqld]
+
+# resolv problem: IP address 'xx.xx.xx.xx' could not be resolved: Name or service not known
+skip-name-resolve=1
+log_error_verbosity=3
+
+disabled_storage_engines="MyISAM,BLACKHOLE,FEDERATED,ARCHIVE,MEMORY"
+server_id={id}
+gtid_mode=ON
+enforce_gtid_consistency=ON
+binlog_checksum=NONE
+
+relay_log=node-relay-bin
+
+# plugin_load_add='group_replication.so'
+group_replication_group_name="7a73ff80-70df-11ea-94c2-0242ac120004"
+group_replication_start_on_boot=off
+group_replication_local_address="10.10.0.1{id}:33061"
+group_replication_group_seeds="10.10.0.11:33061,10.10.0.12:33061,10.10.0.13:33061"
+group_replication_ip_whitelist="10.10.0.0/16"
+group_replication_bootstrap_group=off
+group_replication_recovery_get_public_key=on
+#如果多主模式请使能下面两行
+#group_replication_single_primary_mode=OFF
+#group_replication_enforce_update_everywhere_checks=ON
