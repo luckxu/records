@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  zk:
+    image: zookeeper:3.6
+    restart: always
+    hostname: zoo{id}
+    ports:
+      - {id}181:2181
+    networks:
+      vpc:
+         ipv4_address: '10.10.1.1{id}'
+    environment:
+      ZOO_MY_ID: {id}
+      ZOO_SERVERS: server.1=10.10.1.11:2888:3888;2181 server.2=10.10.1.12:2888:3888;2181 server.3=10.10.1.13:2888:3888;2181
+
+networks:
+    vpc:
+      external:
+        name: oems_vpc 
